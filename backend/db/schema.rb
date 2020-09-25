@@ -16,17 +16,21 @@ ActiveRecord::Schema.define(version: 2020_09_25_163211) do
   enable_extension "plpgsql"
 
   create_table "pokemon_teams", force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "pokemon_id"
+    t.bigint "team_id", null: false
+    t.bigint "pokemon_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["pokemon_id"], name: "index_pokemon_teams_on_pokemon_id"
+    t.index ["team_id"], name: "index_pokemon_teams_on_team_id"
   end
 
   create_table "pokemon_types", force: :cascade do |t|
-    t.integer "pokemon_id"
-    t.integer "type_id"
+    t.bigint "pokemon_id", null: false
+    t.bigint "type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["pokemon_id"], name: "index_pokemon_types_on_pokemon_id"
+    t.index ["type_id"], name: "index_pokemon_types_on_type_id"
   end
 
   create_table "pokemons", force: :cascade do |t|
@@ -37,10 +41,11 @@ ActiveRecord::Schema.define(version: 2020_09_25_163211) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -59,4 +64,9 @@ ActiveRecord::Schema.define(version: 2020_09_25_163211) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "pokemon_teams", "pokemons"
+  add_foreign_key "pokemon_teams", "teams"
+  add_foreign_key "pokemon_types", "pokemons"
+  add_foreign_key "pokemon_types", "types"
+  add_foreign_key "teams", "users"
 end
