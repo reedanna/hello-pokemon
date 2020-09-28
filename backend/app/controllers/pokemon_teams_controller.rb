@@ -3,13 +3,13 @@ class PokemonTeamsController < ApplicationController
     def index
         pokemonTeams = PokemonTeam.all
 
-        render json: pokemonTeams.to_json
+        render json: pokemonTeams.to_json, include: [:pokemon, :team]
     end
 
     def show
         pokemonTeam = PokemonTeam.find(params[:id])
 
-        render json: pokemonTeam.to_json
+        render json: pokemonTeam.to_json, include: [:pokemon, :team]
     end
 
     def create

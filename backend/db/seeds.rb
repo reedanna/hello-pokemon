@@ -27,9 +27,23 @@ end
 
 for i in 1..807
     pokemon = PokeApi.get(pokemon: i)
-    newPokemon = Pokemon.create(name: pokemon.name, img_url: pokemon.sprites.front_default)
+    newPokemon = Pokemon.create(name: pokemon.name.capitalize(), img_url: pokemon.sprites.front_default)
     for j in 1..pokemon.types.length
         type = Type.find_by(name: pokemon.types[j-1].type.name)
         PokemonType.create(pokemon_id: pokemon.id, type_id: type.id)
     end
 end
+
+Pokemon.find_by(name: "Nidoran-f").update(name: "Nidoran(F)")
+Pokemon.find_by(name: "Nidoran-m").update(name: "Nidoran(M)")
+Pokemon.find_by(name: "Farfetchd").update(name: "Farfetch'd")
+Pokemon.find_by(name: "Mr-mime").update(name: "Mr. Mime")
+Pokemon.find_by(name: "Ho-oh").update(name: "Ho-Oh")
+Pokemon.find_by(name: "Mime-jr").update(name: "Mime Jr.")
+Pokemon.find_by(name: "Porygon-z").update(name: "Porygon-Z")
+Pokemon.find_by(name: "Type-null").update(name: "Type: Null")
+Pokemon.find_by(name: "Tapu-koko").update(name: "Tapu Koko")
+Pokemon.find_by(name: "Tapu-lele").update(name: "Tapu Lele")
+Pokemon.find_by(name: "Tapu-bulu").update(name: "Tapu Bulu")
+Pokemon.find_by(name: "Tapu-fini").update(name: "Tapu Fini")
+
