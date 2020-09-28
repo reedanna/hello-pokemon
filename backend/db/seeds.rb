@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'poke-api-v2'
 
+#get types from API
 for i in 1..18
     type = PokeApi.get(type: i)
     newType = Type.create(name: type.name, strong_against: [], weak_against: [], immune_to: [])
@@ -22,9 +23,9 @@ for i in 1..18
     end
 
     newType.save
-
 end
 
+#get Pokemon data from API
 for i in 1..807
     pokemon = PokeApi.get(pokemon: i)
     newPokemon = Pokemon.create(name: pokemon.name.capitalize(), img_url: pokemon.sprites.front_default)
@@ -34,6 +35,7 @@ for i in 1..807
     end
 end
 
+#Fix some nonstandard Pokemon names
 Pokemon.find_by(name: "Nidoran-f").update(name: "Nidoran(F)")
 Pokemon.find_by(name: "Nidoran-m").update(name: "Nidoran(M)")
 Pokemon.find_by(name: "Farfetchd").update(name: "Farfetch'd")
