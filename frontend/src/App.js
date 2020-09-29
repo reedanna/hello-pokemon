@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import IndexPage from './components/IndexPage.js';
+import MainPage from './components/MainPage.js';
 
 function App() {
   return (
