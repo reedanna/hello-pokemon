@@ -1,13 +1,191 @@
+body, html {
+  background-image: url(/img/background.png);
+  background-size: 100%;
+  cursor: url(/img/pikachu.png), auto;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.8fr 1fr 1fr 1fr 1fr;
+  gap: 1px 1px;
+}
+.header { grid-area: 1 / 1 / 2 / 7; }
+.left-container { grid-area: 2 / 1 / 5 / 4; }
+.mid-container { grid-area: 2 / 3 / 5 / 5; 
+margin: auto; }
+.right-container { grid-area: 2 / 4 / 5 / 7;}
+.c { grid-area: 5 / 3 / 6 / 4;}
+.d { grid-area: 5 / 4 / 6 / 5;}
+
+
+/* Hellopokemons Text */
+
+@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Luckiest Guy", cursive;
+}
+.hellopokemons {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: 8em;
+  padding: 0;
+  color: white;
+  text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
+    0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1),
+    0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1),
+    -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1), -0.03em 0 0 rgba(0, 0, 0, 1);
+}
+.hellopokemons span {
+    transform: scale(0.9);
+    display: inline-block;
+  }
+.hellopokemons span:first-child {
+    animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
+      alternate;
+  }
+.hellopokemons span:last-child {
+    animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards
+      infinite alternate;
+  }
+@keyframes bop {
+  0% {
+    transform: scale(0.9);
+  }
+  50%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bopB {
+  0% {
+    transform: scale(0.9);
+  }
+  80%,
+  100% {
+    transform: scale(1) rotateZ(-3deg);
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* pokeball */
+
+.pokeball{
+	width: 100px;
+	height: 100px;
+	display:inline-block;
+	margin:20px;
+	position: relative;
+	border: 6px solid #ccc;
+	border-radius: 50%;
+	background-image: -moz-radial-gradient(40% 40%,circle,rgba(0,0,0,.1) 40%,rgba(0,0,0,1) 100%), -moz-linear-gradient(-90deg, #f33 45%, #333 45%, #3f3f3f 50%, #333 55%, #FFF 55%);
+  background-image: -webkit-radial-gradient(40% 40%,circle,rgba(0,0,0,.1) 40%,rgba(0,0,0,1) 100%),-webkit-linear-gradient(-90deg, #f33 45%, #333 45%, #3f3f3f 50%, #333 55%, #FFF 55%);
+  font-size: 20px;
 }
+.pokeball:before{
+	content: "";
+	display: block;
+	position: absolute;
+	z-index: 6;
+	width: 10%;	
+	height: 10%;
+	background-color: #FFF;
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px #AAA, 0 0 0 10px #fff, 0 0 0 16px #3f3f3f;
+	margin: 45%;
+}
+.box:after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 94%;
+  height: 10%;
+  background-color: rgba(0, 0, 0, 0);
+  margin: 45% 3%;
+  box-shadow: 12px 0 0 #fff, -12px 0 0 #fff;
+}
+.pokeball:hover {
+  animation: pulse 1s infinite;
+  animation-timing-function: linear;   
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1)};
+  100% { transform: scale(1); }
+  }
+
+/* login Form, signup Form*/
+
+@import url("https://fonts.googleapis.com/css?family=Fjalla+One&display=swap");
+
+.loginForm, .signupForm {
+  background: #f8f4e5;
+  padding: 50px 100px;
+  border: 2px solid black;
+  box-shadow: 15px 15px 1px #ffa580, 15px 15px 1px 2px black;
+}
+.loginForm input, .signupForm input {
+  display: block;
+  width: 100%;
+  font-size: 14pt;
+  line-height: 28pt;
+  font-family: "Fjalla One";
+  margin-bottom: 28pt;
+  border: none;
+  border-bottom: 5px solid black;
+  background: #f8f4e5;
+  min-width: 250px;
+  padding-left: 5px;
+  outline: none;
+  color: black;
+}
+.loginForm input:focus, .signupForm input:focus {
+  border-bottom: 5px solid #ffa580;
+}
+.loginForm button, .signupForm button {
+  display: block;
+  margin: 0 auto;
+  line-height: 28pt;
+  padding: 0 20px;
+  background: #ffa580;
+  letter-spacing: 2px;
+  transition: 0.2s all ease-in-out;
+  outline: none;
+  border: 1px solid black;
+  box-shadow: 3px 3px 1px #95a4ff, 3px 3px 1px 1px black;
+}
+.loginForm button:hover, .signupForm button:hover {
+  background: black;
+  color: white;
+  border: 1px solid black;
+}
+
+.right-container {
+  width: 450px;
+  border: 2px solid gray;
+  padding: 50px;
+  border-radius: 20%;
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  background-color: #eee;
+  opacity: 0.8;
+}
+
+.left-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.poke-container {
+  flex-wrap: wrap;
+  margin: 2px;
+  background-color: #eee;
+  border-radius: 20px;
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  padding: 20px;
+  opacity: 0.8;
+  width: 20%;
+}
+

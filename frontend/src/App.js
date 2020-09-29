@@ -1,24 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Index from './components/Index.js';
+import Userpage from './components/Userpage';
+import Pokedex from './components/Pokedex';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="grid-container"> 
+    <div className="header">
+      <h1 className="hellopokemons"><span className="first">"HELLO,</span><span className="second"> POKEMONS"</span></h1>
+    </div>
+    <Index />
     </div>
   );
 }
