@@ -14,8 +14,14 @@ class UsersController < ApplicationController
 
     def create
         user = User.new(user_params)
-        user.save
         token = encode_token(user_id: user.id)
+
+        if user.valid?
+            user.save
+            render json: user.to_json
+        else
+            render json: "This request is invalid. Please choose a unique username.".to_json
+        end
     end
 
     def update
