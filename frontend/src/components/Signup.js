@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Login extends Component {
 
     signup = (e) => {
-        fetch('http://localhost:3000/users', {
+        fetch('http://localhost:3001/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

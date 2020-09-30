@@ -25,6 +25,20 @@ body, html {
 .mid-container { grid-area: 2 / 3 / 5 / 5; 
 margin: auto; }
 .right-container { grid-area: 2 / 4 / 5 / 7;}
+.team-left-container { grid-area: 2 / 1 / 5 / 4; 
+  background: #f0c7a1;
+	background: -webkit-linear-gradient(to right, #d4d3dd, #eec68a);
+  background: linear-gradient(to right, #d4d3dd, #e4b894);
+  display: inline-block;
+  border-radius: 10px;
+  width: 600px;
+  height: 450px;
+  align-content: space-around;
+	margin: 0;
+}
+.pokemon-right-container { grid-area: 2 / 4 / 5 / 7;
+
+}
 .pokedex-right-container { grid-area: 2 / 4 / 5 / 7;  
   margin: auto;
   width: 600px;
@@ -401,7 +415,81 @@ body {
 	text-align: center;
 }
 
-.pokedexUl img {
-  width: 100px;
-  height: 100px;
+/* my team */
+
+.pokemon {
+	background-color: #eee;
+	border-radius: 20px;
+	box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+	margin: 20px;
+  padding: 20px;
+  width: 120px;
+  float: left;
+}
+.img-container {
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	text-align: center;
+}
+.img-container img {
+	margin-top: 20px;
+	max-width: 90%;
+}
+.pokemon .info {
+	margin-top: 20px;
+}
+.name {
+	letter-spacing: 1px;
+}
+
+.myteamtext {
+  margin: 5px;
+}
+
+/* pokemon */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700");
+
+.card__image-container {
+  background-color: rgba(0, 0, 0, 0.836);
+  text-align: center;
+  padding: 1em 1em 0;
+  border-radius: 3px 3px 0 0;
+}
+
+.card__image-container img{
+    max-height: 150px;
+    margin: auto;
+    display: inline-block;
+}
+
+.pokemon_card {
+  display: inline-block;
+  width: 300px;
+  padding: 1em;
+  border-radius: 15px;
+  margin: 10px;
+  background: #ddd;
+  text-align: left;
+}
+
+.pokemon_card {
+  background: linear-gradient(110deg, #fdbb2d 0%, #3a1c71 100%);
+  box-shadow: 0px 5px 20px -10px #3a1c71;
+}
+
+.card__caption {
+  background-color: rgba(#ffffff, 0.65);
+  padding: 1em;
+  position: relative;
+  border-radius: 0 0 3px 3px;
+}
+
+.card__name {
+  font-family: "Open Sans Condensed", "Open Sans", helvetica, sans-serif;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
