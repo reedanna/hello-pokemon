@@ -9,7 +9,7 @@ function App() {
     <div className="header">
       <h1 className="hellopokemons"><span className="first">"HELLO,</span><span className="second"> POKEMONS"</span></h1>
     </div>
-    <Index />
+    <Main />
     </div>
   );
 }
