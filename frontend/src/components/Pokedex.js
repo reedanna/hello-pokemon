@@ -13,7 +13,6 @@ class Pokedex extends React.Component{
 
     pokeInfo = (poke) => {
         this.setState({pokeOnpokedex: poke})
-        console.log(poke.types[1])
     }
     
 
@@ -47,7 +46,7 @@ render(){
                 </div>
                 <div className="botom-actions">
                 <div id="actions">
-                    <button className="a"></button>
+                    <button className="a" onClick={()=>this.props.addPoke(this.state.pokeOnpokedex)}>Add to my team</button>
                 </div>
                 <div id="cross">
                     <button className="cross-button up"></button>
