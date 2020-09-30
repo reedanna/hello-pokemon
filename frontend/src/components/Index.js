@@ -5,8 +5,7 @@ class Index extends React.Component {
         super();
         this.state = {
             loginForm: false,
-            signupForm: false,
-            currentUser: ""
+            signupForm: false
         }
     }
 
@@ -23,9 +22,7 @@ class Index extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    currentUser: data.user
-                })
+                this.props.setCurrentUser(data.user)
             })
     }
 
