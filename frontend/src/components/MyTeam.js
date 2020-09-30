@@ -5,7 +5,7 @@ export default class TeamPokemon extends Component {
     render() {
       return (
         <div>
-          Team Pokemon
+          My Team
         </div>
       )
     }
