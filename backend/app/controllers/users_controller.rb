@@ -14,7 +14,8 @@ class UsersController < ApplicationController
 
     def create
         user = User.new(user_params)
-        team.save
+        user.save
+        token = encode_token(user_id: user.id)
     end
 
     def update
@@ -28,8 +29,9 @@ class UsersController < ApplicationController
     end
 
     private
+    
     def user_params
-        params.require(:team).permit(:name, :password)
+        params.permit(:name, :password)
     end
 
 end
