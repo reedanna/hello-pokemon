@@ -3,6 +3,17 @@ body, html {
   background-size: 100%;
   cursor: url(/img/pikachu.png), auto;
 }
+::-webkit-scrollbar {
+  width: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(19, 18, 18); 
+  border-radius: 10px;
+}
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -16,10 +27,13 @@ margin: auto; }
 .right-container { grid-area: 2 / 4 / 5 / 7;}
 .pokedex-right-container { grid-area: 2 / 4 / 5 / 7;  
   margin: auto;
-  width: 500px;
-  height: 300px;
+  width: 600px;
+  height: 400px;
   overflow-y: scroll;
-  overflow-x: hidden;}
+  overflow-x: hidden;
+  background-color: rgba(128, 128, 128, 0.521);
+  border-radius: 10px;
+}
 
 .c { grid-area: 5 / 3 / 6 / 4;}
 .d { grid-area: 5 / 4 / 6 / 5;}
@@ -224,8 +238,9 @@ body {
   grid-row-end: 5;
 }
 .camera-display img {
-    width: auto;
-    height: auto;
+    width: 150px;
+    height: 150px;
+
   }
 
 .divider {
@@ -329,7 +344,6 @@ body {
     grid-column-start: 2;
     border-width: 0;
   }
-
 .bottom-modes {
   grid-row-start: 5;
   grid-row-start: 5;
@@ -338,7 +352,6 @@ body {
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 40% 20% 40%;
 }
-
 .black-button {
   background-color: #404040;
   border: #303030 5px solid;
@@ -355,23 +368,36 @@ body {
   grid-column-start: 3;
   grid-column-end: 5;
 }
-
 .level-button {
   background-color: #1697F9;
   border: #71CDF4 5px solid;
   color: gray;
   cursor: pointer;
 }
+.type-pad {
+  background-color: rgba(245, 248, 245, 0.836);
+  width: 240px;
+  height: 50px;
+  margin: auto;
+  grid-row-start: 4;
+  grid-column-start: 4;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
 
 /* pokemon list */
 
 .pokedexUl {
-  width: 1825px;
-  height: 192px;
-  margin: 0;
-  padding: 0;
+  list-style-type: none;
 }
 
 .pokedexUl li {
   float: left;
+  margin: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 20%;
+	width: 120px;
+	height: 120px;
+	text-align: center;
 }
+

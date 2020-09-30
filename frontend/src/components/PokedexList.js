@@ -2,12 +2,12 @@ import React from 'react';
 
 class PokedexList extends React.Component{
 render(){
-    const pokemon = this.props.pokemon
+    const poke = this.props.pokemon
     return(
         <>
-        <ul className="pokedexUl">
-            <li><img src={pokemon.img_url} alt="poke"/>{pokemon.name}</li>
-        </ul>
+
+            <li><img src={poke.img_url} alt="poke" onClick={()=>this.props.pokeInfo(poke)}/>{poke.name}</li>
+
         </>
     )
 }
