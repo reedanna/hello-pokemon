@@ -2,9 +2,23 @@ import React from 'react';
 import PokedexList from './PokedexList.js';
 
 class Pokedex extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            pokeOnpokedex: [],
+            strong_against: false,
+            weak_against: false
+        }
+    }
+
+    pokeInfo = (poke) => {
+        this.setState({pokeOnpokedex: poke})
+        console.log(poke.types[1])
+    }
     
 
 render(){
+    const p = this.state.pokeOnpokedex
     return(
         <>
         <div className="left-container">
@@ -14,22 +28,22 @@ render(){
                 <button></button>
                 </div>
                 <div className="camera-display">
-                <img src="" alt="poke"/>
+                <img src={p.img_url} alt="poke"/>
                 </div>
                 <div className="divider"></div>
                 <div className="stats-display">
-                <h2>Charmander</h2>
-                <h3>Abilities</h3>
-                <ul>
-                    <li>Solar-power</li>
-                    <li>Blaze</li>
-                </ul>
-                <h3>Moves</h3>
-                <ul>
-                    <li>dragon-rage</li>
-                    <li>dragon-breath</li>
-                    <li>dragon-claw</li>
-                </ul>
+                <h4>{p.name}</h4>
+                {this.state.strong_against?
+                <h5>strong against</h5>
+                :null}
+                {this.state.weak_against?
+                <h5>weak against</h5>
+                :null}
+                </div>
+                <div className="type-pad">TYPES
+                    <h5 className="type">
+                        
+                    </h5>
                 </div>
                 <div className="botom-actions">
                 <div id="actions">
@@ -45,14 +59,12 @@ render(){
                 </div>
             
                 <div className="bottom-modes">
-                
                     <button className="level-button"></button>
                     <button className="level-button"></button>
                     <button className="level-button"></button>
                     <button className="level-button"></button>
-                
-                    <button className="pokedex-mode black-button">Front</button>
-                    <button className="game-mode black-button">Back</button>
+                    <button className="pokedex-mode black-button" onClick={()=>this.setState({strong_against: true, weak_against: false})}>Strong Against</button>
+                    <button className="game-mode black-button" onClick={()=>this.setState({weak_against: true, strong_against: false})}>Weak Against</button>
                 
                 </div>
             
@@ -60,7 +72,9 @@ render(){
             </div>
 
             <div className="pokedex-right-container">
-                {this.props.pokemons.map(pokemon=> <PokedexList key={pokemon.id} pokemon={pokemon} />)}
+            <ul className="pokedexUl">
+                {this.props.pokemons.map(pokemon=> <PokedexList key={pokemon.id} pokemon={pokemon} pokeInfo={this.pokeInfo}/>)}
+                </ul>
                 
             </div>
         </>
