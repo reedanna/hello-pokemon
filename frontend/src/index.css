@@ -385,6 +385,14 @@ body {
   padding-bottom: 10px;
 }
 
+.type-pad h5 {
+  display: inline;
+}
+
+.type-pad p {
+  margin-top: 0px;
+}
+
 /* pokemon list */
 
 .pokedexUl {
