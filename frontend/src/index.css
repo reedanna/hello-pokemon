@@ -401,3 +401,7 @@ body {
 	text-align: center;
 }
 
+.pokedexUl img {
+  width: 100px;
+  height: 100px;
+}
