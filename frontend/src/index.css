@@ -317,6 +317,8 @@ body {
     background-color: #404040;
     border: 5px solid #303030;
     cursor: pointer;
+    color: white;
+    font-size: 36px;
   }
 
 #cross {
@@ -386,9 +388,11 @@ body {
 .level-button {
   background-color: #1697F9;
   border: #71CDF4 5px solid;
-  color: gray;
+  color: black;
+  font-size: 12px;
   cursor: pointer;
 }
+
 .type-pad {
   background-color: rgba(245, 248, 245, 0.836);
   width: 240px;
