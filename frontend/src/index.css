@@ -25,7 +25,6 @@ body, html {
 .mid-container { grid-area: 2 / 3 / 5 / 5; 
 margin: auto; }
 .right-container { grid-area: 2 / 4 / 5 / 7;}
-<<<<<<< HEAD
 .team-left-container { grid-area: 2 / 1 / 5 / 4; 
   background: #f0c7a1;
 	background: -webkit-linear-gradient(to right, #d4d3dd, #eec68a);
@@ -37,11 +36,6 @@ margin: auto; }
   align-content: space-around;
 	margin: 0;
 }
-.pokemon-right-container { grid-area: 2 / 4 / 5 / 7;
-
-}
-=======
->>>>>>> 6615974c0f11760859b1a143c215d984ca8f1a9d
 .pokedex-right-container { grid-area: 2 / 4 / 5 / 7;  
   margin: auto;
   width: 600px;
@@ -402,6 +396,14 @@ body {
   padding-bottom: 10px;
 }
 
+.type-pad h5 {
+  display: inline;
+}
+
+.type-pad p {
+  margin-top: 0px;
+}
+
 /* pokemon list */
 
 .pokedexUl {
@@ -418,7 +420,10 @@ body {
 	text-align: center;
 }
 
-<<<<<<< HEAD
+.pokedexUl img {
+  width: 100px;
+  height: 100px;
+}
 /* my team */
 
 .pokemon {
@@ -496,9 +501,4 @@ body {
   font-size: 1.5em;
   font-weight: 700;
   letter-spacing: 0.02em;
-=======
-.pokedexUl img {
-  width: 100px;
-  height: 100px;
->>>>>>> 6615974c0f11760859b1a143c215d984ca8f1a9d
 }
