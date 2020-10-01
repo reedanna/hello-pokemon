@@ -16,7 +16,7 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/pokemons')
+        fetch('http://localhost:3001/pokemons')
             .then(res => res.json())
             .then(json => {
                 this.setState({ pokemons: json })

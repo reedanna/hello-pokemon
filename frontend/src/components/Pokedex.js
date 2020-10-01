@@ -27,7 +27,10 @@ render(){
                 <button></button>
                 </div>
                 <div className="camera-display">
-                <img src={p.img_url} alt="poke"/>
+                {p.img_url ?
+                <img src={p.img_url} alt={p.name}/>
+                : null
+                }
                 </div>
                 <div className="divider"></div>
                 <div className="stats-display">
@@ -39,10 +42,15 @@ render(){
                 <h5>weak against</h5>
                 :null}
                 </div>
-                <div className="type-pad">TYPES
-                    <h5 className="type">
-                        
-                    </h5>
+                <div className="type-pad"><p>TYPES</p>
+                {p.types ?
+                    p.types.map(type => 
+                        <h5 className="type" key={type.id}>
+                            {type.name}&nbsp;
+                        </h5>)
+                    :
+                    null
+                }
                 </div>
                 <div className="botom-actions">
                 <div id="actions">
