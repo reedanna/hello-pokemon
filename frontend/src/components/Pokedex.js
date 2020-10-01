@@ -6,8 +6,7 @@ class Pokedex extends React.Component {
         super();
         this.state = {
             pokeOnpokedex: [],
-            strong_against: false,
-            weak_against: false,
+            display: "",
             strengths: [],
             weaknesses: [],
             immunities: []
@@ -17,15 +16,13 @@ class Pokedex extends React.Component {
     pokeInfo = (poke) => {
         this.setState({
             pokeOnpokedex: poke,
-            strong_against: false,
-            weak_against: false
+            display: "Name"
         })
     }
 
     calculateStrengths = (poke) => {
         this.setState({
-            strong_against: true,
-            weak_against: false
+            display: "Strong Against"
         })
         if (poke.types.length === 1) {
             console.log(poke.types[0].strong_against)
@@ -36,11 +33,11 @@ class Pokedex extends React.Component {
         else {
             let strengths = poke.types[0].strong_against
             strengths = strengths.filter(type =>
-                !poke.types[1].weak_against.includes(type)
+                !poke.types[1].weak_against.includes(type) && !poke.types[1].immune_to.includes(type)
             )
             strengths = strengths.concat(poke.types[1].strong_against)
             strengths = strengths.filter(type =>
-                !poke.types[0].weak_against.includes(type)
+                !poke.types[0].weak_against.includes(type) && !poke.types[0].immune_to.includes(type)
             )
             console.log([...new Set(strengths)])
             this.setState({
@@ -51,8 +48,7 @@ class Pokedex extends React.Component {
 
     calculateWeaknesses = (poke) => {
         this.setState({
-            strong_against: false,
-            weak_against: true
+            display: "Weak Against"
         })
         if (poke.types.length === 1) {
             console.log(poke.types[0].weak_against)
@@ -76,6 +72,26 @@ class Pokedex extends React.Component {
         }
     }
 
+    calculateImmunities = (poke) => {
+        this.setState({
+            display: "Immune To"
+        })
+        if (poke.types.length === 1) {
+            console.log(poke.types[0].immune_to)
+            this.setState({
+                immunities: poke.types[0].immune_to
+            })
+        }
+        else {
+            let immunities = poke.types[0].immune_to
+            immunities = immunities.concat(poke.types[1].immune_to)
+            console.log([...new Set(immunities)])
+            this.setState({
+                immunities: [...new Set(immunities)]
+            })
+        }
+    }
+
 
     render() {
         const p = this.state.pokeOnpokedex
@@ -95,16 +111,26 @@ class Pokedex extends React.Component {
                         </div>
                         <div className="divider"></div>
                         <div className="stats-display">
-                            <h4>{p.name}</h4>
-                            {this.state.strong_against ?
+                            <h4>{this.state.display}:</h4>
+                            {this.state.display === "Name" ?
+                                <h4>{p.name}</h4>
+                                : null}
+                            {this.state.display === "Strong Against" ?
                                 this.state.strengths.map((type, index) =>
                                     <h5 className="type" key={index} >
                                         {type}&nbsp;
                                     </h5>
                                 )
                                 : null}
-                            {this.state.weak_against ?
+                            {this.state.display === "Weak Against" ?
                                 this.state.weaknesses.map((type, index) =>
+                                    <h5 className="type" key={index} >
+                                        {type}&nbsp;
+                                    </h5>
+                                )
+                                : null}
+                            {this.state.display === "Immune To" ?
+                                this.state.immunities.map((type, index) =>
                                     <h5 className="type" key={index} >
                                         {type}&nbsp;
                                     </h5>
@@ -123,7 +149,7 @@ class Pokedex extends React.Component {
                         </div>
                         <div className="botom-actions">
                             <div id="actions">
-                                <button className="a" onClick={() => this.props.addPoke(this.state.pokeOnpokedex)}>Add to my team</button>
+                                <button className="a" onClick={() => this.props.addPoke(this.state.pokeOnpokedex)}>+</button>
                             </div>
                             <div id="cross">
                                 <button className="cross-button up"></button>
@@ -135,12 +161,12 @@ class Pokedex extends React.Component {
                         </div>
 
                         <div className="bottom-modes">
-                            <button className="level-button"></button>
-                            <button className="level-button"></button>
-                            <button className="level-button"></button>
-                            <button className="level-button"></button>
-                            <button className="pokedex-mode black-button" onClick={() => this.calculateStrengths(p)}>Strong Against</button>
-                            <button className="game-mode black-button" onClick={() => this.calculateWeaknesses(p)}>Weak Against</button>
+                            <button className="level-button" onClick={() => this.pokeInfo(p)}>Name</button>
+                            <button className="level-button" onClick={() => this.calculateStrengths(p)}>Strong</button>
+                            <button className="level-button" onClick={() => this.calculateWeaknesses(p)}>Weak</button>
+                            <button className="level-button" onClick={() => this.calculateImmunities(p)}>Immune</button>
+                            <button className="pokedex-mode black-button"></button>
+                            <button className="game-mode black-button"></button>
 
                         </div>
 
