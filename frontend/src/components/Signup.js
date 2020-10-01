@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 export default class Login extends Component {
 
     signup = (e) => {
-<<<<<<< HEAD
-        fetch('http://localhost:3000/users', {
-=======
         fetch('http://localhost:3001/users', {
->>>>>>> 0ed2c437f0fcd162ed53dd4a5d61c3abcaeefe37
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
