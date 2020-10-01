@@ -1,6 +1,6 @@
 import React from 'react'
 import Pokedex from './Pokedex.js';
-import MyTeam from './MyTeam.js';
+import TeamInfo from './TeamInfo.js';
 import Index from './Index.js';
 
 class Main extends React.Component {
@@ -9,13 +9,14 @@ class Main extends React.Component {
         this.state = {
             currentUser: "",
             pokemons: [],
-            myteam: false,
-            pokedex: false
+            myteampage: false,
+            pokedexpage: false,
+            myteam: []
         }
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/pokemons')
+        fetch('http://localhost:3001/pokemons')
             .then(res => res.json())
             .then(json => {
                 this.setState({ pokemons: json })
@@ -25,35 +26,41 @@ class Main extends React.Component {
     setCurrentUser = (user) => {
         this.setState({
             currentUser: user,
-            myteam: false,
-            pokedex: false
+            myteampage: false,
+            pokedexpage: false
         })
+    }
+
+    addPoke = (poke) => {
+        if (this.state.myteam.length < 6){
+        this.setState({myteam: [...this.state.myteam, poke]})
+        }
     }
 
     render() {
         return (
             <>
-                {!this.state.myteam && !this.state.pokedex && this.state.currentUser !== "" ?
+                {!this.state.myteampage && !this.state.pokedexpage && this.state.currentUser !== "" ?
                     <div>
                         <p>Welcome, {this.state.currentUser.name}!</p>
                     </div>
                     :
                     null}
-                {this.state.myteam ?
-                    <MyTeam />
-                    : null}
-                {this.state.pokedex ?
-                    <Pokedex pokemons={this.state.pokemons} />
-                    : null}
+                {this.state.myteampage? 
+                <TeamInfo myteam={this.state.myteam}/>
+                : null}
+                {this.state.pokedexpage?
+                <Pokedex pokemons={this.state.pokemons} addPoke={this.addPoke}/>
+                : null}
                 {this.state.currentUser === "" ?
                     <Index setCurrentUser={this.setCurrentUser} />
                     :
                     <>
                         <div className="c">
-                            <div className="pokeball" onClick={() => this.setState({ myteam: true, pokedex: false })}>My Team</div>
+                            <div className="pokeball" onClick={() => this.setState({ myteampage: true, pokedexpage: false })}>My Team</div>
                         </div>
                         <div className="d">
-                            <div className="pokeball" onClick={() => this.setState({ pokedex: true, myteam: false })}>Pokedex</div>
+                            <div className="pokeball" onClick={() => this.setState({ pokedexpage: true, myteampage: false })}>Pokedex</div>
                         </div>
                         <div className="f">
                             <div className="pokeball" onClick={() => this.setCurrentUser("")}>Logout</div>
