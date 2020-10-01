@@ -37,8 +37,6 @@ margin: auto; }
   align-content: space-around;
 	margin: 0;
 }
-.pokemon-right-container { grid-area: 2 / 4 / 5 / 7;}
-
 .pokedex-right-container { grid-area: 2 / 4 / 5 / 7;  
   margin: auto;
   width: 600px;
@@ -427,7 +425,6 @@ body {
   width: 100px;
   height: 100px;
 }
-
 /* my team */
 
 .pokemon {
