@@ -6,7 +6,7 @@ render(){
     return(
         <>
 
-            <li><img src={poke.img_url} alt="poke" onClick={()=>this.props.pokeInfo(poke)}/>{poke.name}</li>
+            <li><img src={poke.img_url} alt={poke.name} onClick={()=>this.props.pokeInfo(poke)}/>{poke.name}</li>
 
         </>
     )

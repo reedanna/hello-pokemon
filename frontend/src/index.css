@@ -36,9 +36,6 @@ margin: auto; }
   align-content: space-around;
 	margin: 0;
 }
-.pokemon-right-container { grid-area: 2 / 4 / 5 / 7;
-
-}
 .pokedex-right-container { grid-area: 2 / 4 / 5 / 7;  
   margin: auto;
   width: 600px;
@@ -399,6 +396,14 @@ body {
   padding-bottom: 10px;
 }
 
+.type-pad h5 {
+  display: inline;
+}
+
+.type-pad p {
+  margin-top: 0px;
+}
+
 /* pokemon list */
 
 .pokedexUl {
@@ -415,6 +420,10 @@ body {
 	text-align: center;
 }
 
+.pokedexUl img {
+  width: 100px;
+  height: 100px;
+}
 /* my team */
 
 .pokemon {

@@ -1,7 +1,7 @@
 class PokemonsController < ApplicationController
 
     def index
-        pokemon = Pokemon.all
+        pokemon = Pokemon.all.order('id asc')
 
         render json: pokemon.to_json(include: :types)
     end
