@@ -17,11 +17,22 @@ export default class Login extends Component {
             .then(data => {
                 if (data.name) {
                     alert(`New account made: ${data.name}`)
+                    fetch('http://localhost:3001/teams', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            user_id: data.id,
+                            name: data.name
+                        })
+                    })
                 }
                 else {
                     alert(data)
                 }
             })
+
     }
 
     render() {

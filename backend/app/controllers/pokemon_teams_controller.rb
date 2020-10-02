@@ -14,7 +14,7 @@ class PokemonTeamsController < ApplicationController
 
     def create
         pokemonTeam = PokemonTeam.new(pokemon_team_params)
-        team.save
+        pokemonTeam.save
     end
 
     def update

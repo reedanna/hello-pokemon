@@ -10,8 +10,8 @@ class Main extends React.Component {
         super()
         this.state = {
             currentUser: "",
-            pokemons: [],
-            myteam: []
+            currentTeam: "",
+            pokemons: []
         }
     }
 
@@ -27,17 +27,60 @@ class Main extends React.Component {
         this.setState({
             currentUser: user
         })
-        if (user === "") {
-
+        if (user !== "") {
+            fetch(`http://localhost:3001/users/${user.id}`)
+                .then(res => res.json())
+                .then(json => {
+                    this.setState({
+                        currentTeam: json.teams[0]
+                    })
+                })
         }
         else {
+            this.setState({
+                currentTeam: ""
+            })
         }
     }
 
     addPoke = (poke) => {
-        if (this.state.myteam.length < 6) {
-            this.setState({ myteam: [...this.state.myteam, poke] })
+        if (this.state.currentTeam.pokemon_teams.length < 6) {
+            this.state.currentTeam.pokemon_teams.push({
+                pokemon: poke
+            })
+            fetch('http://localhost:3001/pokemon_teams', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    team_id: this.state.currentTeam.id,
+                    pokemon_id: poke.id
+                })
+            })
         }
+        else {
+            alert("You can only have 6 Pokemon per team!")
+        }
+    }
+
+    releasePoke = (poke) => {
+        console.log(this.state.currentTeam.pokemon_teams.find(pokemon_team => pokemon_team.pokemon.name === poke.name).id)
+        const deletedPokeTeam = this.state.currentTeam.pokemon_teams.find(pokemon_team => pokemon_team.pokemon.name === poke.name)
+        const currentTeamCopy = this.state.currentTeam
+        currentTeamCopy.pokemon_teams = this.state.currentTeam.pokemon_teams.filter(pokemon_team => pokemon_team !== deletedPokeTeam)
+        this.setState({
+            currentTeam: currentTeamCopy
+        })
+
+        fetch(`http://localhost:3001/pokemon_teams/${deletedPokeTeam.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+
+
     }
 
     // calculates which types a Pokemon resists
@@ -92,18 +135,19 @@ class Main extends React.Component {
         return (
             <Router>
                 <Route exact path="/myteam" render={() => (
-                    <TeamInfo myteam={this.state.myteam} 
-                    calculateStrengths={this.calculateStrengths}
-                    calculateWeaknesses={this.calculateWeaknesses}
-                    calculateImmunities={this.calculateImmunities} />
+                    <TeamInfo currentTeam={this.state.currentTeam}
+                        calculateStrengths={this.calculateStrengths}
+                        calculateWeaknesses={this.calculateWeaknesses}
+                        calculateImmunities={this.calculateImmunities}
+                        releasePoke={this.releasePoke} />
                 )} />
 
                 <Route exact path="/pokedex" render={() => (
-                    <Pokedex pokemons={this.state.pokemons} 
-                    addPoke={this.addPoke} 
-                    calculateStrengths={this.calculateStrengths} 
-                    calculateWeaknesses={this.calculateWeaknesses}
-                    calculateImmunities={this.calculateImmunities} />
+                    <Pokedex pokemons={this.state.pokemons}
+                        addPoke={this.addPoke}
+                        calculateStrengths={this.calculateStrengths}
+                        calculateWeaknesses={this.calculateWeaknesses}
+                        calculateImmunities={this.calculateImmunities} />
                 )} />
 
 

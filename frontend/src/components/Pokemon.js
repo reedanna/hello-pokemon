@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 export default class Pokemon extends Component {
   render() {
     const p = this.props.pokemon
-    console.log(this.props.calculateStrengths(p))
     return (
       <>
         <figure className="pokemon_card">
