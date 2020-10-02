@@ -26,15 +26,18 @@ export default class Login extends Component {
     
     render() {
         return (
-
             <div className="loginForm">
+            {this.props.currentUser === "" ?
+
                 <form>
                     <input placeholder="Username" name="username" required="" type="text" />
                     <input placeholder="Password" name="password" required="" type="password" />
                     <button type="button" onClick={this.login}>LOG IN</button>
                 </form>
-            </div>
 
+            : <p>Welcome, {this.props.currentUser.name}!</p>}
+            
+            </div>
         )
     }
 }

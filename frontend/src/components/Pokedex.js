@@ -5,6 +5,7 @@ class Pokedex extends React.Component {
     constructor() {
         super();
         this.state = {
+            visiblePokes: [],
             pokeOnpokedex: [],
             display: "",
             strengths: [],
@@ -13,6 +14,13 @@ class Pokedex extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({
+            visiblePokes: this.props.pokemons
+        })
+    }
+
+    //shows Pokemon on left side of Pokedex
     pokeInfo = (poke) => {
         this.setState({
             pokeOnpokedex: poke,
@@ -20,12 +28,19 @@ class Pokedex extends React.Component {
         })
     }
 
+    //filters Pokemon based on search
+    searchPokemon = (e) => {
+        this.setState({
+            visiblePokes: this.props.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        })
+    }
+
+    // calculates which types a Pokemon resists
     calculateStrengths = (poke) => {
         this.setState({
             display: "Strong Against"
         })
         if (poke.types.length === 1) {
-            console.log(poke.types[0].strong_against)
             this.setState({
                 strengths: poke.types[0].strong_against
             })
@@ -39,19 +54,18 @@ class Pokedex extends React.Component {
             strengths = strengths.filter(type =>
                 !poke.types[0].weak_against.includes(type) && !poke.types[0].immune_to.includes(type)
             )
-            console.log([...new Set(strengths)])
             this.setState({
                 strengths: [...new Set(strengths)]
             })
         }
     }
 
+    // calculates which types a pokemon is weak to
     calculateWeaknesses = (poke) => {
         this.setState({
             display: "Weak Against"
         })
         if (poke.types.length === 1) {
-            console.log(poke.types[0].weak_against)
             this.setState({
                 weaknesses: poke.types[0].weak_against
             })
@@ -65,19 +79,18 @@ class Pokedex extends React.Component {
             weaknesses = weaknesses.filter(type =>
                 !poke.types[0].strong_against.includes(type) && !poke.types[0].immune_to.includes(type)
             )
-            console.log([...new Set(weaknesses)])
             this.setState({
                 weaknesses: [...new Set(weaknesses)]
             })
         }
     }
 
+    //calculates which types a pokemon is immune to
     calculateImmunities = (poke) => {
         this.setState({
             display: "Immune To"
         })
         if (poke.types.length === 1) {
-            console.log(poke.types[0].immune_to)
             this.setState({
                 immunities: poke.types[0].immune_to
             })
@@ -85,7 +98,6 @@ class Pokedex extends React.Component {
         else {
             let immunities = poke.types[0].immune_to
             immunities = immunities.concat(poke.types[1].immune_to)
-            console.log([...new Set(immunities)])
             this.setState({
                 immunities: [...new Set(immunities)]
             })
@@ -165,8 +177,8 @@ class Pokedex extends React.Component {
                             <button className="level-button" onClick={() => this.calculateStrengths(p)}>Strong</button>
                             <button className="level-button" onClick={() => this.calculateWeaknesses(p)}>Weak</button>
                             <button className="level-button" onClick={() => this.calculateImmunities(p)}>Immune</button>
-                            <button className="pokedex-mode black-button"></button>
-                            <button className="game-mode black-button"></button>
+                            <input className="pokedex-mode black-button" onChange={this.searchPokemon}></input>
+                            <button className="game-mode black-button">Search</button>
 
                         </div>
 
@@ -175,7 +187,7 @@ class Pokedex extends React.Component {
 
                 <div className="pokedex-right-container">
                     <ul className="pokedexUl">
-                        {this.props.pokemons.map(pokemon => <PokedexList key={pokemon.id} pokemon={pokemon} pokeInfo={this.pokeInfo} />)}
+                        {this.state.visiblePokes.map(pokemon => <PokedexList key={pokemon.id} pokemon={pokemon} pokeInfo={this.pokeInfo} />)}
                     </ul>
 
                 </div>
