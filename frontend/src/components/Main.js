@@ -43,8 +43,6 @@ class Main extends React.Component {
     render() {
         return (
             <Router>
-
-
                 <Route exact path="/myteam" render={() => (
                     <TeamInfo myteam={this.state.myteam} />
                 )} />
@@ -75,6 +73,10 @@ class Main extends React.Component {
                     : null}
                 {this.state.currentUser !== "" ?
                     <>
+                        <div className="WelcomeContainer">
+                             <img src="./img/professor oak.webp" alt="oak"/>
+                             <p>Welcome, {this.state.currentUser.name}!</p>
+                        </div>
                         <div className="c">
                             <NavLink to="/myteam"><div className="pokeball">My Team</div></NavLink>
                         </div>
