@@ -23,20 +23,23 @@ export default class Login extends Component {
                 }
             })
     }
-    
+
     render() {
         return (
             <div className="loginForm">
-            {this.props.currentUser === "" ?
+                {this.props.currentUser === "" ?
 
-                <form>
-                    <input placeholder="Username" name="username" required="" type="text" />
-                    <input placeholder="Password" name="password" required="" type="password" />
-                    <button type="button" onClick={this.login}>LOG IN</button>
-                </form>
+                    <form>
+                        <input placeholder="Username" name="username" required="" type="text" />
+                        <input placeholder="Password" name="password" required="" type="password" />
+                        <button type="button" onClick={this.login}>LOG IN</button>
+                    </form>
 
-            : <p>Welcome, {this.props.currentUser.name}!</p>}
-            
+                    : <div className="WelcomeContainer">
+                        <img src="./img/professor oak.webp" alt="oak" />
+                        <p>Welcome, {this.props.currentUser.name}!</p>
+                    </div>
+                }
             </div>
         )
     }

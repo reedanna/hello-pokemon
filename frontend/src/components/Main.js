@@ -73,10 +73,10 @@ class Main extends React.Component {
                     : null}
                 {this.state.currentUser !== "" ?
                     <>
-                        <div className="WelcomeContainer">
+                        {/* <div className="WelcomeContainer">
                              <img src="./img/professor oak.webp" alt="oak"/>
                              <p>Welcome, {this.state.currentUser.name}!</p>
-                        </div>
+                        </div> */}
                         <div className="c">
                             <NavLink to="/myteam"><div className="pokeball">My Team</div></NavLink>
                         </div>
