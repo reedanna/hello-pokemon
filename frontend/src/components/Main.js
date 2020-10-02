@@ -3,7 +3,7 @@ import Pokedex from './Pokedex.js';
 import TeamInfo from './TeamInfo.js';
 import Login from './Login.js'
 import Signup from './Signup.js'
-import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
 class Main extends React.Component {
     constructor() {
