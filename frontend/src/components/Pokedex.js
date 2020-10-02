@@ -35,75 +35,30 @@ class Pokedex extends React.Component {
         })
     }
 
-    // calculates which types a Pokemon resists
-    calculateStrengths = (poke) => {
+    //display's a pokemon's type resistances on the Pokedex
+    showStrengths = (poke) => {
         this.setState({
-            display: "Strong Against"
+            display: "Strong Against",
+            strengths: this.props.calculateStrengths(poke)
         })
-        if (poke.types.length === 1) {
-            this.setState({
-                strengths: poke.types[0].strong_against
-            })
-        }
-        else {
-            let strengths = poke.types[0].strong_against
-            strengths = strengths.filter(type =>
-                !poke.types[1].weak_against.includes(type) && !poke.types[1].immune_to.includes(type)
-            )
-            strengths = strengths.concat(poke.types[1].strong_against)
-            strengths = strengths.filter(type =>
-                !poke.types[0].weak_against.includes(type) && !poke.types[0].immune_to.includes(type)
-            )
-            this.setState({
-                strengths: [...new Set(strengths)]
-            })
-        }
     }
 
-    // calculates which types a pokemon is weak to
-    calculateWeaknesses = (poke) => {
+    //display's a pokemon's type weaknesses on the Pokedex
+    showWeaknesses = (poke) => {
         this.setState({
-            display: "Weak Against"
+            display: "Weak Against",
+            weaknesses: this.props.calculateWeaknesses(poke)
         })
-        if (poke.types.length === 1) {
-            this.setState({
-                weaknesses: poke.types[0].weak_against
-            })
-        }
-        else {
-            let weaknesses = poke.types[0].weak_against
-            weaknesses = weaknesses.filter(type =>
-                !poke.types[1].strong_against.includes(type) && !poke.types[1].immune_to.includes(type)
-            )
-            weaknesses = weaknesses.concat(poke.types[1].weak_against)
-            weaknesses = weaknesses.filter(type =>
-                !poke.types[0].strong_against.includes(type) && !poke.types[0].immune_to.includes(type)
-            )
-            this.setState({
-                weaknesses: [...new Set(weaknesses)]
-            })
-        }
     }
 
-    //calculates which types a pokemon is immune to
-    calculateImmunities = (poke) => {
+    //displays a pokemon's immunities on the Pokedex
+    showImmunities = (poke) => {
         this.setState({
-            display: "Immune To"
+            display: "Immune To",
+            immunities: this.props.calculateImmunities(poke)
         })
-        if (poke.types.length === 1) {
-            this.setState({
-                immunities: poke.types[0].immune_to
-            })
-        }
-        else {
-            let immunities = poke.types[0].immune_to
-            immunities = immunities.concat(poke.types[1].immune_to)
-            this.setState({
-                immunities: [...new Set(immunities)]
-            })
-        }
-    }
 
+    }
 
     render() {
         const p = this.state.pokeOnpokedex
@@ -174,9 +129,9 @@ class Pokedex extends React.Component {
 
                         <div className="bottom-modes">
                             <button className="level-button" onClick={() => this.pokeInfo(p)}>Name</button>
-                            <button className="level-button" onClick={() => this.calculateStrengths(p)}>Strong</button>
-                            <button className="level-button" onClick={() => this.calculateWeaknesses(p)}>Weak</button>
-                            <button className="level-button" onClick={() => this.calculateImmunities(p)}>Immune</button>
+                            <button className="level-button" onClick={() => this.showStrengths(p)}>Strong</button>
+                            <button className="level-button" onClick={() => this.showWeaknesses(p)}>Weak</button>
+                            <button className="level-button" onClick={() => this.showImmunities(p)}>Immune</button>
                             <input className="pokedex-mode black-button" onChange={this.searchPokemon}></input>
                             <button className="game-mode black-button">Search</button>
 

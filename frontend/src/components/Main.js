@@ -40,21 +40,76 @@ class Main extends React.Component {
         }
     }
 
+    // calculates which types a Pokemon resists
+    calculateStrengths = (poke) => {
+        if (poke.types.length === 1) {
+            return poke.types[0].strong_against
+        }
+        else {
+            let strengths = poke.types[0].strong_against
+            strengths = strengths.filter(type =>
+                !poke.types[1].weak_against.includes(type) && !poke.types[1].immune_to.includes(type)
+            )
+            strengths = strengths.concat(poke.types[1].strong_against)
+            strengths = strengths.filter(type =>
+                !poke.types[0].weak_against.includes(type) && !poke.types[0].immune_to.includes(type)
+            )
+            return [...new Set(strengths)]
+        }
+    }
+
+    // calculates which types a pokemon is weak to
+    calculateWeaknesses = (poke) => {
+        if (poke.types.length === 1) {
+            return poke.types[0].weak_against
+        }
+        else {
+            let weaknesses = poke.types[0].weak_against
+            weaknesses = weaknesses.filter(type =>
+                !poke.types[1].strong_against.includes(type) && !poke.types[1].immune_to.includes(type)
+            )
+            weaknesses = weaknesses.concat(poke.types[1].weak_against)
+            weaknesses = weaknesses.filter(type =>
+                !poke.types[0].strong_against.includes(type) && !poke.types[0].immune_to.includes(type)
+            )
+            return [...new Set(weaknesses)]
+        }
+    }
+
+    //calculates which types a pokemon is immune to
+    calculateImmunities = (poke) => {
+        if (poke.types.length === 1) {
+            return poke.types[0].immune_to
+        }
+        else {
+            let immunities = poke.types[0].immune_to
+            immunities = immunities.concat(poke.types[1].immune_to)
+            return [...new Set(immunities)]
+        }
+    }
+
     render() {
         return (
             <Router>
                 <Route exact path="/myteam" render={() => (
-                    <TeamInfo myteam={this.state.myteam} />
+                    <TeamInfo myteam={this.state.myteam} 
+                    calculateStrengths={this.calculateStrengths}
+                    calculateWeaknesses={this.calculateWeaknesses}
+                    calculateImmunities={this.calculateImmunities} />
                 )} />
 
                 <Route exact path="/pokedex" render={() => (
-                    <Pokedex pokemons={this.state.pokemons} addPoke={this.addPoke} />
+                    <Pokedex pokemons={this.state.pokemons} 
+                    addPoke={this.addPoke} 
+                    calculateStrengths={this.calculateStrengths} 
+                    calculateWeaknesses={this.calculateWeaknesses}
+                    calculateImmunities={this.calculateImmunities} />
                 )} />
 
 
                 <div className="mid-container">
                     <Route exact path="/login" render={() => (
-                        <Login setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
+                        <Login setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />
                     )} />
                     <Route exact path="/signup" render={() => (
                         <Signup setCurrentUser={this.setCurrentUser} />
@@ -73,10 +128,6 @@ class Main extends React.Component {
                     : null}
                 {this.state.currentUser !== "" ?
                     <>
-                        {/* <div className="WelcomeContainer">
-                             <img src="./img/professor oak.webp" alt="oak"/>
-                             <p>Welcome, {this.state.currentUser.name}!</p>
-                        </div> */}
                         <div className="c">
                             <NavLink to="/myteam"><div className="pokeball">My Team</div></NavLink>
                         </div>
