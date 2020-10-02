@@ -41,7 +41,8 @@ class Main extends React.Component {
         return (
             <>
                 {!this.state.myteampage && !this.state.pokedexpage && this.state.currentUser !== "" ?
-                    <div>
+                    <div className="WelcomeContainer">
+                        <img src="./img/professor oak.webp" alt="oak"/>
                         <p>Welcome, {this.state.currentUser.name}!</p>
                     </div>
                     :

@@ -25,7 +25,16 @@ body, html {
 .mid-container { grid-area: 2 / 3 / 5 / 5; 
 margin: auto; }
 .right-container { grid-area: 2 / 4 / 5 / 7;}
-
+.WelcomeContainer { grid-area: 2 / 2 / 5 / 6;
+  display: flex;
+  align-content: flex-end;
+  justify-content: center;
+}
+.WelcomeContainer img {
+  width: 150px;
+  height: 350px;
+  padding-top: 100px;
+}
 .team-left-container { grid-area: 2 / 1 / 5 / 4; 
   background: #f0c7a1;
 	background: -webkit-linear-gradient(to right, #d4d3dd, #eec68a);
@@ -526,4 +535,41 @@ body {
 
 .releaseButton:hover {
   background-color: rgba(255, 255, 255, 0.562);
+}
+
+/* welcome message */
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+.WelcomeContainer p {
+  border-right: solid 3px rgba(0,255,0,.75);
+  white-space: nowrap;
+  overflow: hidden;    
+  font-family: 'Source Code Pro', monospace;  
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  position: absolute;
+  top: 300px;
+  right: 400px;
+}
+
+
+/* text animation */
+
+@keyframes animated-text{
+  from{width: 0;}
+  to{width: 286px;}
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor{
+  from{border-right-color: black;}
+  to{border-right-color: transparent;}
+}
+
+/* Animation */
+.WelcomeContainer p {
+  animation: animated-text 4s steps(17,end) 1s 1 normal both,
+             animated-cursor 600ms steps(17,end) infinite;
 }
