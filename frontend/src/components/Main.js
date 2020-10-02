@@ -1,7 +1,9 @@
 import React from 'react'
 import Pokedex from './Pokedex.js';
 import TeamInfo from './TeamInfo.js';
-import Index from './Index.js';
+import Login from './Login.js'
+import Signup from './Signup.js'
+import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 
 class Main extends React.Component {
     constructor() {
@@ -9,8 +11,6 @@ class Main extends React.Component {
         this.state = {
             currentUser: "",
             pokemons: [],
-            myteampage: false,
-            pokedexpage: false,
             myteam: []
         }
     }
@@ -25,49 +25,68 @@ class Main extends React.Component {
 
     setCurrentUser = (user) => {
         this.setState({
-            currentUser: user,
-            myteampage: false,
-            pokedexpage: false
+            currentUser: user
         })
+        if (user === "") {
+
+        }
+        else {
+        }
     }
 
     addPoke = (poke) => {
-        if (this.state.myteam.length < 6){
-        this.setState({myteam: [...this.state.myteam, poke]})
+        if (this.state.myteam.length < 6) {
+            this.setState({ myteam: [...this.state.myteam, poke] })
         }
     }
 
     render() {
         return (
-            <>
-                {!this.state.myteampage && !this.state.pokedexpage && this.state.currentUser !== "" ?
-                    <div>
-                        <p>Welcome, {this.state.currentUser.name}!</p>
-                    </div>
-                    :
-                    null}
-                {this.state.myteampage? 
-                <TeamInfo myteam={this.state.myteam}/>
-                : null}
-                {this.state.pokedexpage?
-                <Pokedex pokemons={this.state.pokemons} addPoke={this.addPoke}/>
-                : null}
+            <Router>
+
+
+                <Route exact path="/myteam" render={() => (
+                    <TeamInfo myteam={this.state.myteam} />
+                )} />
+
+                <Route exact path="/pokedex" render={() => (
+                    <Pokedex pokemons={this.state.pokemons} addPoke={this.addPoke} />
+                )} />
+
+
+                <div className="mid-container">
+                    <Route exact path="/login" render={() => (
+                        <Login setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
+                    )} />
+                    <Route exact path="/signup" render={() => (
+                        <Signup setCurrentUser={this.setCurrentUser} />
+                    )} />
+                </div>
+
                 {this.state.currentUser === "" ?
-                    <Index setCurrentUser={this.setCurrentUser} />
-                    :
                     <>
                         <div className="c">
-                            <div className="pokeball" onClick={() => this.setState({ myteampage: true, pokedexpage: false })}>My Team</div>
+                            <NavLink to="/login"><div className="pokeball">Login</div></NavLink>
                         </div>
                         <div className="d">
-                            <div className="pokeball" onClick={() => this.setState({ pokedexpage: true, myteampage: false })}>Pokedex</div>
-                        </div>
-                        <div className="f">
-                            <div className="pokeball" onClick={() => this.setCurrentUser("")}>Logout</div>
+                            <NavLink to="/signup"><div className="pokeball">Sign up</div></NavLink>
                         </div>
                     </>
-                }
-            </>
+                    : null}
+                {this.state.currentUser !== "" ?
+                    <>
+                        <div className="c">
+                            <NavLink to="/myteam"><div className="pokeball">My Team</div></NavLink>
+                        </div>
+                        <div className="d">
+                            <NavLink to="/pokedex"><div className="pokeball">Pokedex</div></NavLink>
+                        </div>
+                        <div className="f">
+                            <NavLink to="/login"><div className="pokeball" onClick={() => this.setCurrentUser("")}>Logout</div></NavLink>
+                        </div>
+                    </>
+                    : null}
+            </Router>
         )
     }
 

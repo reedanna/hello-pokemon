@@ -372,18 +372,18 @@ body {
 .black-button {
   background-color: #404040;
   border: #303030 5px solid;
-  color: gray;
-  cursor: pointer
+  color: white;
 }
 .pokedex-mode {
   grid-row-start: 3;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 4;
 }
 .game-mode {
   grid-row-start: 3;
-  grid-column-start: 3;
+  grid-column-start: 4;
   grid-column-end: 5;
+  cursor: pointer;
 }
 .level-button {
   background-color: #1697F9;
